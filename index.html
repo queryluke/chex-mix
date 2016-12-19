@@ -1,0 +1,67 @@
+---
+layout: default
+title: Chex Mix!
+---
+<section>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-xs-center">
+            <h1 class="display-1">Chex Mix!!!</h1>
+            <p class="lead">It's delicious...</p>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="nav nav-inline">
+                        {% for post in site.posts reversed %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-target="#{{ post.title | slugify }}">{{ post.title }}</a>
+                            </li>
+                        {% endfor %}
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">More coming soon!</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% for post in site.posts reversed %}
+<section id="{{ post.title | slugify }}">
+    <div class="clip-circle">
+        <!-- <object type="image/svg+xml" data="assets/images/{{ icon }}.svg" class="food-icon {{ icon }}">{{ icon }}</object> -->
+        <!--<img class="food-icon {{ icon }}" src="assets/images/{{ icon }}.svg" alt="{{ icon }}">-->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="food-icon {{ post.icon }}" alt="{{ post.icon }}">
+            <use xlink:href="assets/images/{{ post.icon }}.svg#Capa_1" />
+        </svg>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="mix-title text-xs-center pt-3">{{ post.title }}</h2>
+            </div>
+        </div>
+        <div class="row p-3 mix-body">
+            <div class="col-xs-12 col-sm-6">
+                <h3>Seasonings:</h3>
+                <ul>
+                    <li>&frac12; stick - <em>Unsalted Butter</em></li>
+                    {% for ingredient in post.seasonings %}
+                        {% include ingredient.html ingredient=ingredient %}
+                    {% endfor %}
+                </ul>
+                <h3>Mix:</h3>
+                <ul>
+                    <li>7 c - <em>Chex Cereal (mix of Corn, Rice, & Wheat)</em></li>
+                    {% for ingredient in post.ingredients %}
+                        {% include ingredient.html ingredient=ingredient %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <h3>Directions</h3>
+                {{ post.content }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}

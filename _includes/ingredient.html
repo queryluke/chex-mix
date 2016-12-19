@@ -1,0 +1,29 @@
+{% assign amt = include.ingredient.amount | split: '.' %}
+{% capture whole %}
+    {% if amt[0] == '0' %}
+    {% else %}
+        {{ amt[0] }}
+    {% endif %}
+{% endcapture %}
+
+{% capture nth %}
+    {% if amt[1] == '25' %}
+        &frac14;
+    {% elsif amt[1] == '5' %}
+        &frac12;
+    {% elsif amt[1] == '75' %}
+        &frac34;
+    {% else %}
+    {% endif %}
+{% endcapture %}
+
+{% capture measurement %}
+    {{ whole | strip }}{{ nth | strip }} {{ include.ingredient.measurement | strip }}
+{% endcapture %}
+
+<li>
+    {{ measurement }} - <em>{{ include.ingredient.name }}</em>
+    {% if include.ingredient.note %}
+        <span class="note">{{ include.ingredient.note }}</span>
+    {% endif %}
+</li>

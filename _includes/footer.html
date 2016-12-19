@@ -1,0 +1,40 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="icon-attribution text-xs-center">
+                    <small>
+                        Icon made by <a href="http://www.flaticon.com/authors/madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com">www.flaticon.com</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script>
+    $(function(){
+        $('.mix-title, .clip-circle').click(function(){
+            var section = $(this).parent('section');
+            makeActive(section)
+        });
+
+        function makeActive(element){
+            $('section').removeClass('active');
+            $(element).addClass('active');
+            $('html, body').animate({
+                scrollTop: $(element).offset().top
+            }, 200);
+        };
+
+        $('.nav a').click(function(e){
+            e.preventDefault();
+            makeActive($(this).data('target'));
+        });
+    });
+</script>
+</body>
+</html>
